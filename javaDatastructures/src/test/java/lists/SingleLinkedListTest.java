@@ -39,4 +39,18 @@ class SingleLinkedListTest{
         assertEquals("[ 8, 2, 5, 10 ]",linkedList.toString());
     }
 
+    @Test
+    public void deletionTest(){
+        SingleLinkedList<Integer> linkedList = new SingleLinkedList<>();
+
+        linkedList.add(5);
+        linkedList.add(10);
+        linkedList.add(15);
+
+        linkedList.delete(1);
+
+        assertEquals(15,linkedList.get(1));
+        assertEquals("[ 5, 15 ]",linkedList.toString());
+    }
+
 }

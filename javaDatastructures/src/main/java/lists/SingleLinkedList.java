@@ -1,36 +1,53 @@
 package lists;
 
+import java.util.NoSuchElementException;
+
 public class SingleLinkedList<T> {
     private Node<T> head;
 
-    public int size(){
+    public int size() {
         int size = 1;
         Node<T> node = head;
-        while (node.next != null){
+        while (node.next != null) {
             size++;
             node = node.next;
         }
         return size;
     }
 
-    public T get(int index){
+    public T get(int index) {
         Node<T> node = head;
-        for (int i=0; i<index;i++){
+        for (int i = 0; i < index; i++) {
+            if (node.next == null) {
+                throw new NoSuchElementException();
+            }
             node = node.next;
         }
         return node.value;
     }
 
-    public void add(T value){
-        if (head == null){
+    public void add(T value) {
+        if (head == null) {
             head = new Node<>(value);
             return;
         }
         Node<T> currentNode = head;
-        while ( currentNode.next != null){
+        while (currentNode.next != null) {
             currentNode = currentNode.next;
         }
         currentNode.next = new Node<>(value);
+    }
+
+    public void delete(int index) {
+        Node<T> node = head;
+        for (int i = 0; i < index - 1; i++) {
+            if (node.next == null) {
+                throw new NoSuchElementException();
+            }
+            node = node.next;
+        }
+
+        node.next = node.next.next;
     }
 
     @Override
@@ -40,7 +57,7 @@ public class SingleLinkedList<T> {
 
         Node<T> node = head;
 
-        while (node.next != null){
+        while (node.next != null) {
             builder.append(node.value).append(", ");
             node = node.next;
         }
@@ -51,11 +68,11 @@ public class SingleLinkedList<T> {
     }
 }
 
-class Node<T>{
+class Node<T> {
     T value;
     Node<T> next;
 
-    public Node(T value){
+    public Node(T value) {
         this.value = value;
     }
 }
