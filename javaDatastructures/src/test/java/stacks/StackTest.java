@@ -30,9 +30,12 @@ class StackTest {
 
         stack.push(1);
         stack.push(2);
+        stack.push(3);
+        stack.push(4);
+        stack.push(5);
 
-        assertEquals(2, stack.size());
-        assertEquals(2, stack.peek());
+        assertEquals(5, stack.size());
+        assertEquals(5, stack.peek());
     }
 
     @ParameterizedTest

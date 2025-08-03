@@ -26,6 +26,7 @@ public class ArrayBasedStack<T> implements Stack<T> {
         if (tail == capacity) {
             Object[] currentStorage = storage;
             capacity = capacity * capacity;
+            storage = new Object[capacity];
             System.arraycopy(currentStorage, 0, storage, 0, tail);
         }
         storage[tail] = value;
