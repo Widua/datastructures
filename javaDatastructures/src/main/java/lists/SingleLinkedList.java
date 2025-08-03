@@ -55,7 +55,7 @@ public class SingleLinkedList<T> implements List<T>{
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        builder.append("[ ");
+        builder.append("[");
 
         Node<T> node = head;
 
@@ -64,7 +64,7 @@ public class SingleLinkedList<T> implements List<T>{
             node = node.next;
         }
 
-        builder.append(node.value).append(" ]");
+        builder.append(node.value).append("]");
 
         return builder.toString();
     }
