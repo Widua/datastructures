@@ -5,39 +5,44 @@ public class ArrayBasedQueue<T> implements Queue<T> {
     private int tail;
     private int head;
     private int capacity;
+    private int length;
     private Object[] storage;
 
 
     public ArrayBasedQueue(){
-        this.tail = this.head = 0;
+        this.tail = this.head = this.length = 0;
         this.capacity = 3;
         this.storage = new Object[capacity];
     }
 
     @Override
     public int size() {
-        return tail-head;
+        return length;
     }
 
     @Override
     public T deque() {
         T value = (T) storage[head];
-
         storage[head]=null;
         head++;
+        length--;
         return value;
     }
 
     @Override
     public void enqueue(T value) {
-        if (tail == capacity){
+        if ((head %storage.length==tail% storage.length) && length!=0){
+            Object[] currentArr = storage;
             capacity = capacity*capacity;
-            Object[] currStorage = storage;
             storage = new Object[capacity];
-            System.arraycopy(currStorage,head,storage,0,currStorage.length);
+            System.arraycopy(currentArr,head,storage,0,currentArr.length);
+            System.arraycopy(currentArr,0,storage,length,tail%currentArr.length);
+            head = 0;
+            tail = currentArr.length;
         }
-        storage[tail] = value;
+        storage[tail%storage.length] = value;
         tail++;
+        length++;
     }
 
     @Override
