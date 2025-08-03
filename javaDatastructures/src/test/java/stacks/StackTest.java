@@ -11,7 +11,8 @@ import static org.junit.jupiter.api.Assertions.*;
 class StackTest {
     static Stream<Supplier<Stack<Integer>>> stackProvider() {
         return Stream.of(
-                NodeBasedStack::new
+                NodeBasedStack::new,
+                ArrayBasedStack::new
         );
     }
 

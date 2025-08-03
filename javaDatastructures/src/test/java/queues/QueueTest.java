@@ -12,7 +12,8 @@ class QueueTest {
 
     static Stream<Supplier<Queue<Integer>>> queueProvider() {
         return Stream.of(
-                NodeBasedQueue::new
+                NodeBasedQueue::new,
+                ArrayBasedQueue::new
         );
     }
 
@@ -23,8 +24,10 @@ class QueueTest {
         queue.enqueue(5);
         queue.enqueue(6);
         queue.enqueue(3);
+        queue.enqueue(10);
+        queue.enqueue(15);
 
-        assertEquals(3, queue.size());
+        assertEquals(5, queue.size());
         assertEquals(5, queue.peek());
     }
 
