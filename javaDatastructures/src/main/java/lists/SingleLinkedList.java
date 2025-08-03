@@ -2,17 +2,18 @@ package lists;
 
 import java.util.NoSuchElementException;
 
-public class SingleLinkedList<T> {
+public class SingleLinkedList<T> implements List<T>{
     private Node<T> head;
+    private Node<T> tail;
+    private int length;
 
     public int size() {
-        int size = 1;
-        Node<T> node = head;
-        while (node.next != null) {
-            size++;
-            node = node.next;
-        }
-        return size;
+        return length;
+    }
+
+    public SingleLinkedList(){
+        this.length = 0;
+        head = tail = null;
     }
 
     public T get(int index) {
@@ -27,18 +28,19 @@ public class SingleLinkedList<T> {
     }
 
     public void add(T value) {
+        length++;
+        Node<T> currentNode = new Node<>(value);
         if (head == null) {
-            head = new Node<>(value);
+            head = tail = currentNode;
             return;
         }
-        Node<T> currentNode = head;
-        while (currentNode.next != null) {
-            currentNode = currentNode.next;
-        }
-        currentNode.next = new Node<>(value);
+        Node<T> currentTail = tail;
+        currentTail.next = currentNode;
+        tail = currentNode;
     }
 
     public void delete(int index) {
+        length--;
         Node<T> node = head;
         for (int i = 0; i < index - 1; i++) {
             if (node.next == null) {

@@ -4,11 +4,11 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class QueueTest {
+class NodeBasedQueueTest {
 
     @Test
     public void testEnqueue(){
-        Queue<Integer> queue = new Queue<>();
+        NodeBasedQueue<Integer> queue = new NodeBasedQueue<>();
         queue.enqueue(5);
         queue.enqueue(6);
         queue.enqueue(3);
@@ -19,7 +19,7 @@ class QueueTest {
 
     @Test
     public void testDeque(){
-        Queue<Integer> queue = new Queue<>();
+        NodeBasedQueue<Integer> queue = new NodeBasedQueue<>();
 
         queue.enqueue(5);
         queue.enqueue(6);

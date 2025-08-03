@@ -4,18 +4,18 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class StackTest {
+class NodeBasedStackTest {
 
     @Test
     public void creatingStackTest(){
-        Stack<Integer> stack = new Stack<>();
+        NodeBasedStack<Integer> stack = new NodeBasedStack<>();
 
         assertEquals(0,stack.size());
     }
 
     @Test
     public void addingElementsToStackTest(){
-        Stack<Integer> stack = new Stack<>();
+        NodeBasedStack<Integer> stack = new NodeBasedStack<>();
 
         stack.push(1);
         stack.push(2);
@@ -26,7 +26,7 @@ class StackTest {
 
     @Test
     public void poppingElementsFromStackTest(){
-        Stack<Integer> stack = new Stack<>();
+        NodeBasedStack<Integer> stack = new NodeBasedStack<>();
 
         stack.push(1);
         stack.push(2);
