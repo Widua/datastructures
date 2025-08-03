@@ -9,7 +9,6 @@ class QueueTest {
     @Test
     public void testEnqueue(){
         Queue<Integer> queue = new Queue<>();
-
         queue.enqueue(5);
         queue.enqueue(6);
         queue.enqueue(3);

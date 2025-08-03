@@ -5,44 +5,45 @@ public class Queue<T> {
     private Node<T> head;
     private Node<T> tail;
 
-    public Queue(){
+    public Queue() {
         this.head = this.tail = null;
         this.length = 0;
     }
 
-    public void enqueue(T value){
-        this.length ++;
+    public void enqueue(T value) {
+        this.length++;
         Node<T> newNode = new Node<>(value);
-        if (tail == null){
+        if (tail == null) {
             head = tail = newNode;
         }
         this.tail.next = newNode;
         this.tail = newNode;
     }
 
-    public int size(){
+    public int size() {
         return length;
     }
 
-    public T deque(){
-        if (head == null){
+    public T deque() {
+        if (head == null) {
             return null;
         }
-        this.length --;
+        this.length--;
         Node<T> head = this.head;
         this.head = this.head.next;
         return head.value;
     }
-    public T peek(){
+
+    public T peek() {
         return head.value;
     }
 }
 
-class Node<T>{
+class Node<T> {
     T value;
     Node<T> next;
 
-    Node(T value){
+    Node(T value) {
         this.value = value;
     }
 }
