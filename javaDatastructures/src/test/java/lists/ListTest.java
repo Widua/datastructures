@@ -13,6 +13,7 @@ class ListTest {
     static Stream<Supplier<List<Integer>>> listProvider(){
         return Stream.of(
                 SingleLinkedList::new,
+                DoublyLinkedList::new,
                 ArrayList::new
         );
     }
@@ -57,14 +58,16 @@ class ListTest {
     public void deletionTest(Supplier<List<Integer>> listSupplier){
         List<Integer> list = listSupplier.get();
 
+        list.add(0);
         list.add(5);
         list.add(10);
         list.add(15);
+        list.add(20);
 
         list.delete(1);
 
-        assertEquals(15,list.get(1));
-        assertEquals("[5, 15]",list.toString());
+        assertEquals(10,list.get(1));
+        assertEquals("[0, 10, 15, 20]",list.toString());
     }
 
 }
