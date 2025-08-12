@@ -60,9 +60,24 @@ public class BinarySearchTree implements Tree {
 
     }
 
+    private boolean recFind(Integer value, BTNode curr){
+        if (curr.value.equals(value)){
+            return true;
+        }
+
+        if (curr.value >= value && curr.leftChild != null){
+            return recFind(value,curr.leftChild);
+        }
+        if (curr.value < value && curr.rightChild != null){
+            return recFind(value,curr.rightChild);
+        }
+
+        return false;
+    }
+
     @Override
     public boolean find(Integer value) {
-        return false;
+        return recFind(value,root);
     }
 
 
