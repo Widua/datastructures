@@ -1,73 +1,93 @@
 package graphs;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
-public class AdjacencyList implements Graph{
+public class AdjacencyList implements Graph {
 
     List<List<AdjacencyListElement>> edges;
-    Set<Integer> vertex;
+    Map<Integer, Integer> vertexes;
 
-    public AdjacencyList(){
+    public AdjacencyList() {
         this.edges = new ArrayList<>();
-        this.vertex = new HashSet<>();
+        this.vertexes = new HashMap<>();
     }
 
 
     @Override
     public boolean adjacent(int vertexA, int vertexB) {
-        return false;
+        return edges.get(vertexA).stream()
+                .anyMatch(e -> e.to == vertexB);
     }
 
     @Override
     public int[] neighbors(int vertex) {
-        return new int[0];
+        return edges.get(vertex)
+                .stream()
+                .mapToInt(e -> e.to).toArray()
+                ;
     }
 
     @Override
-    public void addVertex(Integer vertex) {
-
+    public void addVertex(Integer vertex, Integer value) {
+        vertexes.put(vertex, value);
+        edges.add(vertex, new ArrayList<>());
     }
 
     @Override
     public void removeVertex(Integer vertex) {
-
+        vertexes.remove(vertex);
     }
 
     @Override
     public void addEdge(Integer vertexA, Integer vertexB, int weight) {
-
+        edges.get(vertexA)
+                .add(
+                        new AdjacencyListElement(
+                                vertexB, weight
+                        )
+                );
     }
 
     @Override
     public void removeEdge(int vertexA, int vertexB) {
-
+        List<AdjacencyListElement> updatedEdgelist = edges.get(vertexA)
+                .stream()
+                .filter(elem -> elem.to != vertexB).toList();
+        edges.set(vertexA, updatedEdgelist);
     }
 
     @Override
     public Integer getVertexValue(int vertex) {
-        return 0;
+        return vertexes.get(vertex);
     }
 
     @Override
     public void setVertexValue(int vertex, int newValue) {
-
+        vertexes.put(vertex, newValue);
     }
 
     @Override
     public int getEdgeWeight(int vertexA, int vertexB) {
-        return 0;
+        return edges.get(vertexA)
+                .stream()
+                .filter(e -> e.to == vertexB)
+                .findFirst()
+                .get().weight;
     }
 
     @Override
-    public int setEdgeWeight(int vertexA, int vertexB, int weight) {
-        return 0;
+    public void setEdgeWeight(int vertexA, int vertexB, int weight) {
+        edges.get(vertexA)
+                .stream()
+                .filter(e -> e.to == vertexB)
+                .findFirst()
+                .ifPresent(
+                        e -> e.weight = weight
+                );
     }
 }
 
-class AdjacencyListElement{
+class AdjacencyListElement {
     int to;
     int weight;
 
@@ -79,21 +99,5 @@ class AdjacencyListElement{
     public AdjacencyListElement(int to) {
         this.to = to;
         this.weight = 1;
-    }
-
-    public int getTo() {
-        return to;
-    }
-
-    public void setTo(int to) {
-        this.to = to;
-    }
-
-    public int getWeight() {
-        return weight;
-    }
-
-    public void setWeight(int weight) {
-        this.weight = weight;
     }
 }
