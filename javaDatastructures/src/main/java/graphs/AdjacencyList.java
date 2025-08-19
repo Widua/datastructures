@@ -53,7 +53,7 @@ public class AdjacencyList implements Graph {
                 .stream()
                 .filter(e -> e.to == vertexB)
                 .findFirst()
-                .orElse(new AdjacencyListElement(-1,-1))
+                .orElse(new AdjacencyListElement(-1,0))
                 .weight;
     }
 

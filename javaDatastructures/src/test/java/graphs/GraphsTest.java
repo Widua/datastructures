@@ -9,7 +9,7 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class AdjacencyListTest {
+class GraphsTest {
 
     public void setupGraph(Graph graph) {
         graph.addEdge(0, 1, 1);
@@ -22,7 +22,10 @@ class AdjacencyListTest {
     }
 
     static Stream<Supplier<Graph>> graphProvider() {
-        return Stream.of(AdjacencyList::new, AdjacencyMatrix::new);
+        return Stream.of(
+                AdjacencyList::new,
+                AdjacencyMatrix::new
+        );
     }
 
 
@@ -68,7 +71,7 @@ class AdjacencyListTest {
 
     @ParameterizedTest
     @MethodSource("graphProvider")
-    public void weightRemovalTest(Supplier<Graph> graphSupplier) {
+    public void edgeRemovalTest(Supplier<Graph> graphSupplier) {
         Graph graph = graphSupplier.get();
         setupGraph(graph);
 
@@ -76,7 +79,7 @@ class AdjacencyListTest {
 
         int weight_1_3 = graph.getEdgeWeight(1, 3);
 
-        assertEquals(-1, weight_1_3);
+        assertEquals(0, weight_1_3);
     }
 
 }
