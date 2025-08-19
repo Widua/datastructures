@@ -5,13 +5,10 @@ import java.util.*;
 public class AdjacencyList implements Graph {
 
     List<List<AdjacencyListElement>> edges;
-    Map<Integer, Integer> vertexes;
 
     public AdjacencyList() {
         this.edges = new ArrayList<>();
-        this.vertexes = new HashMap<>();
     }
-
 
     @Override
     public boolean adjacent(int vertexA, int vertexB) {
@@ -28,18 +25,12 @@ public class AdjacencyList implements Graph {
     }
 
     @Override
-    public void addVertex(Integer vertex, Integer value) {
-        vertexes.put(vertex, value);
-        edges.add(vertex, new ArrayList<>());
-    }
-
-    @Override
-    public void removeVertex(Integer vertex) {
-        vertexes.remove(vertex);
-    }
-
-    @Override
     public void addEdge(Integer vertexA, Integer vertexB, int weight) {
+
+        if (edges.size() <= vertexA){
+            edges.add(vertexA,new ArrayList<>());
+        }
+
         edges.get(vertexA)
                 .add(
                         new AdjacencyListElement(
@@ -57,22 +48,13 @@ public class AdjacencyList implements Graph {
     }
 
     @Override
-    public Integer getVertexValue(int vertex) {
-        return vertexes.get(vertex);
-    }
-
-    @Override
-    public void setVertexValue(int vertex, int newValue) {
-        vertexes.put(vertex, newValue);
-    }
-
-    @Override
     public int getEdgeWeight(int vertexA, int vertexB) {
         return edges.get(vertexA)
                 .stream()
                 .filter(e -> e.to == vertexB)
                 .findFirst()
-                .get().weight;
+                .orElse(new AdjacencyListElement(-1,-1))
+                .weight;
     }
 
     @Override
